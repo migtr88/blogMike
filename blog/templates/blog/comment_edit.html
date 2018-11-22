@@ -1,0 +1,12 @@
+{% extends 'blog/base_blog.html' %}
+{% block content %}
+<div class="w3-card-4 w3-margin w3-white">
+		  <div class="w3-container">
+	<h1>New comment </h1>
+	<form method = "POST" class = "post-form">{% csrf_token %}
+		{{form.as_p}}
+		<button type = "submite" class = "save btn btn-default">Save</button>
+	</form>
+	</div>
+	</div>
+	{%endblock%}
