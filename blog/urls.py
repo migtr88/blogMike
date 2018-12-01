@@ -17,6 +17,10 @@ urlpatterns = [
 	url(r'^comment/(?P<pk>\d+)/edit/$',views.edit_comment_to_post, name = 'edit_comment_to_post'),
 	url(r'^comment/(?P<pk>\d+)/aprove/$', views.aprove_comment, name = 'aprove_comment'),
 	url(r'^comment/(?P<pk>\d+)/remove/$', views.remove_comment, name = 'remove_comment' ),
+	url(r'^autor_new/', views.autor_new, name = 'autor_new'),
+	url(r'^autor_edit/(?P<pk>\d+)/edit/$', views.autor_edit, name = 'autor_edit'),
+	url(r'^autor_remove/(?P<pk>\d+)/remove/$', views.autor_remove, name = 'autor_remove'),
+	url(r'^autor_detail/(?P<pk>\d+)/detail/$', views.autor_detail, name = 'autor_detail'),
 ]
 
 #path('', views.post_draft_list, name = 'post_draft_list')

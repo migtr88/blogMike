@@ -1,0 +1,22 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block content %}
+{% load staticfiles %}
+ <div class="w3-card-4 w3-margin w3-white">
+	
+	<div class="w3-container">
+	<h1>{{ autor.name }}</h1>
+		<img src = "{{autor.image.url}}" alt = "{{autor.image.url}}"  style="max-width:100%;width:auto;height:auto">
+		  <!--para editar el formulario--->
+		  <!-- hacmeos que se a visible solo para el administrador-->
+		  {%if user.is_authenticated %}
+		 <a class="btn btn-default" href="{% url 'autor_edit' pk=autor.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		 <a class = "btn btn-default" href = "{% url 'autor_remove' pk=autor.pk %}" ><span class="glyphicon glyphicon-remove"></span></a> 		
+		 {%endif%}
+		  
+	<div class="w3-container">
+		<p>{{ autor.description|linebreaksbr }}</p>
+</div>
+	
+		
+	{%endblock%}

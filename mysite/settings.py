@@ -26,6 +26,7 @@ SECRET_KEY = '#%_3itv_^954r=5!31g)c4eba3hfbbrf=%76jj@744=c%sl83n'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',' . pythonanywhere.com','migtr88.pythonanywhere.com']
+
 LOGIN_REDIRECT_URL = "/"
 
 # Application definition
@@ -74,13 +75,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -121,3 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")

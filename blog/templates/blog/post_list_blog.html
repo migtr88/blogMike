@@ -4,12 +4,12 @@
 				<!Delimita el contenido que se extiende de base.html>
 				{% block content %}
 				<!mostramos los posts, el bucle muestra cada post de la lista, linebreaksbr convierte los saltos de linea en párrafos >
-				{%for post in posts %}
-
-
+				{%for post in posts %}  
+				
+				
 					  <!-- Blog entry -->
 					  <div class="w3-card-4 w3-margin w3-white">
-						<img src="./static/img/woods.jpg" alt="Nature" style="width:100%">
+						<img src="{{post.image.url}}" alt="{{post.image.url}}" style="max-width:100%;width:auto;height:auto">
 						<div class="w3-container">
 						 <!--- <h3><b>TITLE HEADING</b></h3>-->
 						  <h1><a href="{% url 'post_detail_blog' pk=post.pk %}">{{ post.title }}</a></h1>
@@ -26,56 +26,47 @@
 							  <p><button class="w3-button w3-padding-large w3-white w3-border" href="{% url 'post_detail_blog' pk=post.pk %}"><b>READ MORE »</b></button></p>
 							</div>
 							<div class="w3-col m4 w3-hide-small">
-							<p><span class="w3-padding-large w3-right"><b>Comments:</b><span class="w3-tag">{{ post.comment.count}}</span></span></p>
+							<p><a href="{% url 'post_detail_blog' pk=post.pk %}"<b>Comments: </b>{{ post.comments.count }}</a></p>
 							</div>
 						  </div>
 						</div>
 					  </div>
-
+					  
 					   {% endfor%}
 					   </div>
 		<!-- END BLOG ENTRIES -->
 		<!-- Introduction menu -->
 		<div class="w3-col l4">
-		  <!-- About Card -->
+		  <!-- Autor Space -->
+		  {% for autor in autors %}
 		  <div class="w3-card w3-margin w3-margin-top">
-		  <img src="./static/img/miguelFoto.jpg" style="width:100%">
+		 <a href = "{% url 'autor_detail' pk=autor.pk %}"> <h4>Autor</h4></a>
+		  <img src="{{autor.image.url}}" style="max-width:100%;width:auto;height:auto">
+		 
 			<div class="w3-container w3-white">
-			  <h4><b>Miguel</b></h4>
-			  <p>Just me, myself and I, exploring the universe of uknownment. </p>
+			  <h4><b>{{autor.name}}</b></h4>
+			  <p>{{autor.description}}</p>
 			</div>
 		  </div><hr>
-
+		  {% endfor %}
 		  <!-- Posts -->
 		  <div class="w3-card w3-margin">
 			<div class="w3-container w3-padding">
 			  <h4>Popular Posts</h4>
 			</div>
 			<ul class="w3-ul w3-hoverable w3-white">
+			{%for post in visitados %}
+			
 			  <li class="w3-padding-16">
-				<img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-				<span class="w3-large">Lorem</span><br>
-				<span>Sed mattis nunc</span>
+				<img src="{{post.image.url}}" alt="Image" class="w3-left w3-margin-right" style="max-width:100%;width:auto;height:auto">
+				<span class="w3-large"><h4><a href = "{% url 'post_detail_blog' pk=post.pk %}">{{post.title}}</a></h4></span><br>
+				
 			  </li>
-			  <li class="w3-padding-16">
-				<img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-				<span class="w3-large">Ipsum</span><br>
-				<span>Praes tinci sed</span>
-			  </li>
-			  <li class="w3-padding-16">
-				<img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-				<span class="w3-large">Dorum</span><br>
-				<span>Ultricies congue</span>
-			  </li>
-			  <li class="w3-padding-16 w3-hide-medium w3-hide-small">
-				<img src="/w3images/rock.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-				<span class="w3-large">Mingsum</span><br>
-				<span>Lorem ipsum dipsum</span>
-			  </li>
+			  {% endfor %}
 			</ul>
 		  </div>
-		  <hr>
-
+		  <hr> 
+		 
 		  <!-- Labels / tags -->
 		  <div class="w3-card w3-margin">
 			<div class="w3-container w3-padding">
@@ -90,7 +81,7 @@
 			</p>
 			</div>
 		  </div>
-
+		  
 		<!-- END Introduction Menu -->
 		</div>
 					   {% endblock %}

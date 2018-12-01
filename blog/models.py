@@ -10,6 +10,9 @@ class Post(models.Model):
 	text = models.TextField()
 	created_date = models.DateTimeField(default = timezone.now)
 	published_date = models.DateTimeField(blank = True, null = True)
+	visitas = models.IntegerField()
+	image = models.ImageField(verbose_name="image", upload_to = "blog")
+	#visitas = 0 
 	
 	def publish(self):
 		self.published_date = timezone.now()
@@ -17,8 +20,12 @@ class Post(models.Model):
 	
 	def __str__(self):
 		return self.title
+	
+	def contar_visita(self):
+		 self.visitas = self.visitas + 1 
+		 self.save()
+	
 
-		
 #Creamos un modelo de comentarios 
 
 class Comments(models.Model):
@@ -26,7 +33,7 @@ class Comments(models.Model):
 	post = models.ForeignKey('blog.Post',on_delete = models.CASCADE, related_name='comments')
 	author = models.CharField(max_length = 200)
 	text = models.TextField()
-	created_date = models.DateTimeField(default = timezone.now())
+	created_date = models.DateTimeField(default = timezone.now)
 	approved_comment = models.BooleanField(default = False)
 	
 	def approved(self):
@@ -38,6 +45,25 @@ class Comments(models.Model):
 		return self.text
 	
 	def approved_comments(self):
-		comentarios = self.comments.filter(approved_comment=True)
-		return comentarios.count()
+		return self.objects.filter(approved_comment=True)
+		
+
+
+#Modelo de autor, muy parecido al post 
+
+class Autor(models.Model):
+		
+		name = models.CharField(max_length = 50)
+		description = models.TextField()
+		image = models.ImageField(upload_to = "blog", verbose_name="image")
+		author = models.ForeignKey('auth.User',on_delete = models.CASCADE)
+		
+		def __str__(self):
+		
+			return self.name
+		
+		
+
+		
+
 		

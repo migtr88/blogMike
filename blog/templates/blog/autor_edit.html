@@ -1,15 +1,15 @@
---<Formulario para editar y añadir posts>--
-
 {% extends 'blog/base_blog.html' %}
+
 {% block content %}
 <div class="w3-card-4 w3-margin w3-white">
-<img src="{{post.image.url}}" alt="Nature"style="max-width:100%;width:auto;height:auto">
+<img src="{{autor.image.url}}" alt="{{autor.image.url}}"style="max-width:100%;width:auto;height:auto">
 		  <div class="w3-container">
-	<h1>New Post </h1>
+	<h1>Edit Autor Profile </h1>
 	<form method = "POST" class = "post-form" enctype="multipart/form-data">{% csrf_token %}
 		{{form.as_p}}
 		<button type = "submite" class = "save btn btn-default">Save</button>
 	</form>
 	</div>
 	</div>
-	{%endblock%}
+
+{% endblock %}
