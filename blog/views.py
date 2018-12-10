@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Post,Comments, Autor
+from .models import Post,Comments, Autor,Category
 from django.utils import timezone
 from .forms import PostForm, CommentForm,AutorForm
 from django.shortcuts import redirect
@@ -15,8 +15,10 @@ def post_list(request):
 	#Solo mostraremos los 4 más visitados
 	visitados = [ordenados_por_visitas[0],ordenados_por_visitas[1],ordenados_por_visitas[2],ordenados_por_visitas[3] ]
 	autors = Autor.objects.order_by('-name')
+	#Obtenemos las categorias que hay creadas
+	categorias = Category.objects.all()
 	#Los mostramos 
-	return render(request, 'blog/post_list_blog.html', {'posts':posts,'visitados':visitados,'autors':autors})
+	return render(request, 'blog/post_list_blog.html', {'posts':posts,'visitados':visitados,'autors':autors, "categorias":categorias})
 
 def post_list_new(request):
 	posts = Post.objects.filter(published_date__lte = timezone.now()).order_by('-created_date')
@@ -26,14 +28,17 @@ def post_list_new(request):
 	visitados = [ordenados_por_visitas[0],ordenados_por_visitas[1],ordenados_por_visitas[2],ordenados_por_visitas[3] ]
 	autors = Autor.objects.order_by('-name')
 	#posts = Post.objects.order_by('visitas')
-	return render(request, 'blog/post_list_blog.html', {'posts':posts,'visitados':visitados,'autors':autors})
+	categorias = Category.objects.all()
+	return render(request, 'blog/post_list_blog.html', {'posts':posts,'visitados':visitados,'autors':autors,"categorias":categorias})
 	
 
 def post_detail_blog(request, pk):
 	
 	post = get_object_or_404(Post,pk = pk)
 	post.contar_visita()
-	return render(request, 'blog/post_detail_blog.html', {'post' : post})
+	categorias = post.categories.all()
+
+	return render(request, 'blog/post_detail_blog.html', {'post' : post,'categorias':categorias})
 	
 @login_required	
 def post_new(request):

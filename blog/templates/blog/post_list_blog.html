@@ -18,13 +18,13 @@
 						</div>
 
 						<div class="w3-container">
-						 <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-							tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>-->
+
 							<p>{{post.text|linebreaksbr}}</p>
 						  <div class="w3-row">
 							<div class="w3-col m8 s12">
-							  <p><button class="w3-button w3-padding-large w3-white w3-border" href="{% url 'post_detail_blog' pk=post.pk %}"><b>READ MORE »</b></button></p>
-							</div>
+							<!--<a href = "{% url 'post_detail_blog' pk=post.pk %}" class = "w3-button w3-padding-large w3-white w3-border" >READ MORE </a>-->
+							<!--<p><button class="w3-button w3-padding-large w3-white w3-border"role = "link" onclick = "{% url 'post_detail_blog' pk=post.pk %}"> <b>READ MORE »</b></a></button></p>-->
+						</div>
 							<div class="w3-col m4 w3-hide-small">
 							<p><a href="{% url 'post_detail_blog' pk=post.pk %}"<b>Comments: </b>{{ post.comments.count }}</a></p>
 							</div>
@@ -58,7 +58,7 @@
 			{%for post in visitados %}
 			
 			  <li class="w3-padding-16">
-				<img src="{{post.image.url}}" alt="Image" class="w3-left w3-margin-right" style="max-width:100%;width:auto;height:auto">
+				<img src="{{post.image.url}}" alt="Image" class="w3-left w3-margin-right" style="width:50px">
 				<span class="w3-large"><h4><a href = "{% url 'post_detail_blog' pk=post.pk %}">{{post.title}}</a></h4></span><br>
 				
 			  </li>
@@ -70,15 +70,10 @@
 		  <!-- Labels / tags -->
 		  <div class="w3-card w3-margin">
 			<div class="w3-container w3-padding">
-			  <h4>Tags</h4>
+			  <h4>Categorías</h4>
 			</div>
 			<div class="w3-container w3-white">
-			<p><span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
-			  <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
-			  <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
-			  <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
-			  <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
-			</p>
+			<p>{% for categoria in categorias %}<span class="w3-tag w3-light-grey w3-small w3-margin-bottom">{{categoria.name}}</span>{% endfor %}</p>
 			</div>
 		  </div>
 		  
